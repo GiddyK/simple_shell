@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * env_get_key - gets the value of an environment variable
+ * env_get_keys - gets the value of an environment variable
  * @key: the environment variable of interest
  * @data: struct of the program's data
  * Return: a pointer to the value of the variable or NULL if it doesn't exist
  */
-char *env_get_key(char *key, data_of_program *data)
+char *env_get_keys(char *key, data_of_program *data)
 {
 	int i, key_length = 0;
 
@@ -126,3 +126,4 @@ void print_environ(data_of_program *data)
 		_print("\n");
 	}
 }
+

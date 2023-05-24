@@ -20,7 +20,7 @@ int builtin_exit(data_of_program *data)
 			}
 		errno = _atoi(data->tokens[1]);
 	}
-	free_all_data(data);
+	free_data(data);
 	exit(errno);
 }
 
@@ -31,7 +31,7 @@ int builtin_exit(data_of_program *data)
  */
 int builtin_cd(data_of_program *data)
 {
-	char *dir_home = env_get_key("HOME", data), *dir_old = NULL;
+	char *dir_home = env_get_keys("HOME", data), *dir_old = NULL;
 	char old_dir[128] = {0};
 	int error_code = 0;
 
@@ -39,10 +39,10 @@ int builtin_cd(data_of_program *data)
 	{
 		if (str_compare(data->tokens[1], "-", 0))
 		{
-			dir_old = env_get_key("OLDPWD", data);
+			dir_old = env_get_keys("OLDPWD", data);
 			if (dir_old)
 				error_code = set_work_directory(data, dir_old);
-			_print(env_get_key("PWD", data));
+			_print(env_get_keys("PWD", data));
 			_print("\n");
 
 			return (error_code);
@@ -145,15 +145,16 @@ int builtin_alias(data_of_program *data)
 
 	/* if there are no arguments, print all environment */
 	if (data->tokens[1] == NULL)
-		return (print_alias(data, NULL));
+		return (modify_alias(data, NULL));
 
 	while (data->tokens[++i])
 	{/* if there are arguments, set or print each env variable*/
 		if (count_characters(data->tokens[i], "="))
 			set_alias(data->tokens[i], data);
 		else
-			print_alias(data, data->tokens[i]);
+			modify_alias(data, data->tokens[i]);
 	}
 
 	return (0);
 }
+

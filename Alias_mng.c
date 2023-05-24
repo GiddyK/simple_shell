@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * print_alias - add, remove or show aliases
+ * modify_alias - add, remove or show aliases
  * @data: struct for the program's data
  * @alias: name of the alias to be printed
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int print_alias(data_of_program *data, char *alias)
+int modify_alias(data_of_program *data, char *alias)
 {
 	int i, j, alias_length;
 	char buffer[250] = {'\0'};
@@ -26,9 +26,9 @@ int print_alias(data_of_program *data, char *alias)
 						break;
 				}
 				buffer[j + 1] = '\0';
-				buffer_add(buffer, "'");
-				buffer_add(buffer, data->alias_list[i] + j + 1);
-				buffer_add(buffer, "'\n");
+				add_buffer(buffer, "'");
+				add_buffer(buffer, data->alias_list[i] + j + 1);
+				add_buffer(buffer, "'\n");
 				_print(buffer);
 			}
 		}
@@ -102,11 +102,12 @@ int set_alias(char *alias_string, data_of_program *data)
 	/* add the alias */
 	if (temp)
 	{/* if the alias already exist */
-		buffer_add(buffer, "=");
-		buffer_add(buffer, temp);
+		add_buffer(buffer, "=");
+		add_buffer(buffer, temp);
 		data->alias_list[j] = str_duplicate(buffer);
 	}
 	else /* if the alias does not exist */
 		data->alias_list[j] = str_duplicate(alias_string);
 	return (0);
 }
+

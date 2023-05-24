@@ -15,7 +15,7 @@ int execute(data_of_program *data)
 		return (retval);
 
 	/* check for program file system */
-	retval = find_program(data);
+	retval = find_programs(data);
 	if (retval)
 	{/* if program not found */
 		return (retval);
@@ -45,3 +45,4 @@ int execute(data_of_program *data)
 	}
 	return (0);
 }
+

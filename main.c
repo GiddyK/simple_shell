@@ -21,7 +21,7 @@ int main(int argc, char *argv[], char *env[])
 		prompt = PROMPT_MSG;
 	}
 	errno = 0;
-	sisifo(prompt, data);
+	gidi(prompt, data);
 	return (0);
 }
 
@@ -59,10 +59,10 @@ void inicialize_data(data_of_program *data, int argc, char *argv[], char **env)
 		data->file_descriptor = open(argv[1], O_RDONLY);
 		if (data->file_descriptor == -1)
 		{
-			_printe(data->program_name);
-			_printe(": 0: Can't open ");
-			_printe(argv[1]);
-			_printe("\n");
+			_prints(data->program_name);
+			_prints(": 0: Can't open ");
+			_prints(argv[1]);
+			_prints("\n");
 			exit(127);
 		}
 	}
@@ -85,36 +85,37 @@ void inicialize_data(data_of_program *data, int argc, char *argv[], char **env)
 	}
 }
 /**
- * sisifo - its a infinite loop that shows the prompt
+ * gidi - its a infinite loop that shows the prompt
  * @prompt: prompt to be printed
  * @data: its a infinite loop that shows the prompt
  */
-void sisifo(char *prompt, data_of_program *data)
+void gidi(char *prompt, data_of_program *data)
 {
 	int error_code = 0, string_len = 0;
 
 	while (++(data->exec_counter))
 	{
 		_print(prompt);
-		error_code = string_len = _getline(data);
+		error_code = string_len = Getlines(data);
 
 		if (error_code == EOF)
 		{
-			free_all_data(data);
+			free_data(data);
 			exit(errno); /* if EOF is the fisrt Char of string, exit*/
 		}
 		if (string_len >= 1)
 		{
 			expand_alias(data);
-			expand_variables(data);
+			variables_expand(data);
 			tokenize(data);
 			if (data->tokens[0])
 			{ /* if a text is given to prompt, execute */
 				error_code = execute(data);
 				if (error_code != 0)
-					_print_error(error_code, data);
+					_print_error_string(error_code, data);
 			}
-			free_recurrent_data(data);
+			recurrent_data(data);
 		}
 	}
 }
+

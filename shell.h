@@ -13,9 +13,9 @@
 #include <signal.h> /* for signal management */
 #include <fcntl.h> /* for open files*/
 
-/************* MACROS **************/
+/*************MINORP **************/
 
-#include "macros.h" /* for msg help and prompt */
+#include "minorp.h" /* for msg help and prompt */
 
 /************* STRUCTURES **************/
 
@@ -63,31 +63,31 @@ typedef struct builtins
 void inicialize_data(data_of_program *data, int arc, char *argv[], char **env);
 
 /* Makes the infinite loop that shows the prompt*/
-void sisifo(char *prompt, data_of_program *data);
+void gidi(char *prompt, data_of_program *data);
 
 /* Print the prompt in a new line */
 void handle_ctrl_c(int opr UNUSED);
 
 
-/*========  _getline.c  ========*/
+/*========  Getlines.c  ========*/
 
 /* Read one line of the standar input*/
-int _getline(data_of_program *data);
+int Getlines(data_of_program *data);
 
 /* split the each line for the logical operators if it exist */
-int check_logic_ops(char *array_commands[], int i, char array_operators[]);
+int check_logics(char *array_commands[], int i, char array_operators[]);
 
 
 /*======== expansions.c ========*/
 
 /* expand variables */
-void expand_variables(data_of_program *data);
+void variables_expand(data_of_program *data);
 
 /* expand aliases */
 void expand_alias(data_of_program *data);
 
 /* append the string to the end of the buffer*/
-int buffer_add(char *buffer, char *str_to_add);
+int add_buffer(char *buffer, char *str_to_add);
 
 
 /*======== str_tok.c ========*/
@@ -111,13 +111,13 @@ int execute(data_of_program *data);
 int builtins_list(data_of_program *data);
 
 
-/*======== find_in_path.c ========*/
+/*======== find_path.c ========*/
 
 /* Creates an array of the path directories */
 char **tokenize_path(data_of_program *data);
 
 /* Search for program in path */
-int find_program(data_of_program *data);
+int find_programs(data_of_program *data);
 
 
 /************** HELPERS FOR MEMORY MANAGEMENT **************/
@@ -126,13 +126,13 @@ int find_program(data_of_program *data);
 /*======== helpers_free.c ========*/
 
 /* Frees the memory for directories */
-void free_array_of_pointers(char **directories);
+void free_pointers(char **directories);
 
 /* Free the fields needed each loop */
-void free_recurrent_data(data_of_program *data);
+void recurrent_data(data_of_program *data);
 
 /* Free all field of the data */
-void free_all_data(data_of_program *data);
+void free_data(data_of_program *data);
 
 
 /************** BUILTINS **************/
@@ -159,7 +159,7 @@ int builtin_alias(data_of_program *data);
 /*======== builtins_env.c ========*/
 
 /* Shows the environment where the shell runs */
-int builtin_env(data_of_program *data);
+int Builtin_env(data_of_program *data);
 
 /* create or override a variable of environment */
 int builtin_set_env(data_of_program *data);
@@ -174,7 +174,7 @@ int builtin_unset_env(data_of_program *data);
 /*======== env_management.c ========*/
 
 /* Gets the value of an environment variable */
-char *env_get_key(char *name, data_of_program *data);
+char *env_get_keys(char *name, data_of_program *data);
 
 /* Overwrite the value of the environment variable */
 int env_set_key(char *key, char *value, data_of_program *data);
@@ -195,16 +195,16 @@ void print_environ(data_of_program *data);
 int _print(char *string);
 
 /* Prints a string in the standar error */
-int _printe(char *string);
+int _prints(char *string);
 
 /* Prints a string in the standar error */
-int _print_error(int errorcode, data_of_program *data);
+int _print_error_string(int errorcode, data_of_program *data);
 
 
 /************** HELPERS FOR STRINGS MANAGEMENT **************/
 
 
-/*======== helpers_string.c ========*/
+/*======== helpers_string ========*/
 
 /* Counts the number of characters of a string */
 int str_length(char *string);
@@ -225,7 +225,7 @@ void str_reverse(char *string);
 /*======== helpers_numbers.c ========*/
 
 /* Cast from int to string */
-void long_to_string(long number, char *string, int base);
+void number_to_string(long number, char *string, int base);
 
 /* convert an string in to a number */
 int _atoi(char *s);
@@ -234,10 +234,10 @@ int _atoi(char *s);
 int count_characters(char *string, char *character);
 
 
-/*======== alias_management.c ========*/
+/*======== Alias_mng.c ========*/
 
-/* print the list of alias */
-int print_alias(data_of_program *data, char *alias);
+/* modifies the list of alias */
+int modify_alias(data_of_program *data, char *alias);
 
 /* get the alias name */
 char *get_alias(data_of_program *data, char *alias);
@@ -247,3 +247,4 @@ int set_alias(char *alias_string, data_of_program *data);
 
 
 #endif /* SHELL_H */
+

@@ -7,7 +7,7 @@
 /* Resume from the unused attibute */
 #define UNUSED __attribute__((unused))
 
-/* buffer size for each read call in _getline */
+/* buffer size for each read call in Getlines */
 #define BUFFER_SIZE 1024
 
 /************* FORMATTED STRING FOR HELP BUILT IN **************/
@@ -58,3 +58,4 @@
 "	help\t[built_name]\n\n"
 
 #endif
+

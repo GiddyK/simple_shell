@@ -39,3 +39,4 @@ void tokenize(data_of_program *data)
 		data->tokens[i] = str_duplicate(_strtok(NULL, delimiter));
 	}
 }
+

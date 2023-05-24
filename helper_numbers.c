@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * long_to_string - converts a number to a string.
+ * number_to_string - converts a number to a string.
  * @number: number to be converten in an string.
  * @string: buffer to save the number as string.
  * @base: base to convert number
  *
  * Return: Nothing.
  */
-void long_to_string(long number, char *string, int base)
+void number_to_string(long number, char *string, int base)
 {
 	int index = 0, inNegative = 0;
 	long cociente = number;
@@ -84,3 +84,4 @@ int count_characters(char *string, char *character)
 	}
 	return (counter);
 }
+

@@ -3,12 +3,12 @@
 int check_file(char *full_path);
 
 /**
- * find_program - find a program in path
+ * find_programs - find a program in path
  * @data: a pointer to the program's data
  * Return: 0 if success, errcode otherwise
  */
 
-int find_program(data_of_program *data)
+int find_programs(data_of_program *data)
 {
 	int i = 0, ret_code = 0;
 	char **directories;
@@ -41,13 +41,13 @@ int find_program(data_of_program *data)
 			errno = 0;
 			free(data->tokens[0]);
 			data->tokens[0] = str_duplicate(directories[i]);
-			free_array_of_pointers(directories);
+			free_pointers(directories);
 			return (ret_code);
 		}
 	}
 	free(data->tokens[0]);
 	data->tokens[0] = NULL;
-	free_array_of_pointers(directories);
+	free_pointers(directories);
 	return (ret_code);
 }
 
@@ -65,7 +65,7 @@ char **tokenize_path(data_of_program *data)
 	char *PATH;
 
 	/* get the PATH value*/
-	PATH = env_get_key("PATH", data);
+	PATH = env_get_keys("PATH", data);
 	if ((PATH == NULL) || PATH[0] == '\0')
 	{/*path not found*/
 		return (NULL);
@@ -121,3 +121,4 @@ int check_file(char *full_path)
 	errno = 127;
 	return (127);
 }
+

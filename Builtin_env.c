@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * builtin_env - shows the environment where the shell runs
+ * Builtin_env - shows the environment where the shell runs
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int builtin_env(data_of_program *data)
+int Builtin_env(data_of_program *data)
 {
 	int i;
 	char cpname[50] = {'\0'};
@@ -21,13 +21,13 @@ int builtin_env(data_of_program *data)
 			if (data->tokens[1][i] == '=')
 			{/* checks if exists a var with the same name and change its value*/
 			/* temporally */
-				var_copy = str_duplicate(env_get_key(cpname, data));
+				var_copy = str_duplicate(env_get_keys(cpname, data));
 				if (var_copy != NULL)
 					env_set_key(cpname, data->tokens[1] + i + 1, data);
 
 				/* print the environ */
 				print_environ(data);
-				if (env_get_key(cpname, data) == NULL)
+				if (env_get_keys(cpname, data) == NULL)
 				{/* print the variable if it does not exist in the environ */
 					_print(data->tokens[1]);
 					_print("\n");
@@ -90,3 +90,4 @@ int builtin_unset_env(data_of_program *data)
 
 	return (0);
 }
+
