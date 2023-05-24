@@ -172,20 +172,27 @@ void print_error(info_t *, char *);
 int print_d(int, int);
 char *convert_number(long int, int, int);
 void remove_comments(char *);
+void _eputs(char *);
+int _eputchar(char);
 
 /* toem_Builtins.c */
 int _myexit(info_t *);
 int _mycd(info_t *);
 int _myhelp(info_t *);
+void _eputs(char *);
 
 /* toem_Builtins1.c */
 int _myhistory(info_t *);
 int _myalias(info_t *);
+void _eputs(char *);
+int _eputchar(char);
 
 /*toem_Getline.c */
 ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
+void _puts(char *);
+int _putchar(char);
 
 /* toem_Getinfo.c */
 void clear_info(info_t *);
@@ -217,6 +224,8 @@ list_t *add_node_end(list_t **, const char *, int);
 size_t print_list_str(const list_t *);
 int delete_node_at_index(list_t **, unsigned int);
 void free_list(list_t **);
+void _puts(char *);
+int _putchar(char);
 
 /* toem_Lists1.c */
 size_t list_len(const list_t *);
@@ -224,6 +233,8 @@ char **list_to_strings(list_t *);
 size_t print_list(const list_t *);
 list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
+void _puts(char *);
+int _putchar(char);
 
 /* toem_Vars.c */
 int is_chain(info_t *, char *, size_t *);
